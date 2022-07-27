@@ -28,9 +28,11 @@ console.log(myLibrary);
 
 
 
-window.onload=function(){
+
+function showBooks(){
     const bookList=document.querySelector('.library');
-    
+    const container=document.createElement('div');
+    container.classList.add('hellow');
     for (let i = 0; i < myLibrary.length; i++) {
         const book=document.createElement('div');
         book.classList.add('book');
@@ -39,10 +41,14 @@ window.onload=function(){
             atributes.textContent=value;
             book.appendChild(atributes);
         }
-        
-        bookList.appendChild(book);
+        bookList.appendChild(container);
+        container.appendChild(book);
         
     }
+}
+
+function addNew(){
+    const bookList=document.querySelector('.library');
     const addNewBook=document.createElement('button');
     addNewBook.classList.add('add-btn');
     addNewBook.textContent='Add New Book';
@@ -53,9 +59,22 @@ window.onload=function(){
 
     
     });
+}
+function clear(){
+    const bookList=document.querySelector('.library');
+    bookList.innerHTML='';
+}
+
+
+window.onload=function(){
+    
+    showBooks();
+    addNew();
+    
+    
     const addbtn=document.querySelector('.adlib');
     addbtn.addEventListener('click',()=>{
-        const bbt=document.createElement('li');
+        
         let bAdd=new Book();
         const textFields=document.querySelectorAll('input');
         textFields.forEach(textField=>{
@@ -66,10 +85,9 @@ window.onload=function(){
             }
             
         });
-        
-        bbt.textContent=bAdd.info();
+        clear();
         addBookToLibrary(bAdd);
-        bookList.appendChild(bbt);
+        showBooks();
 
         
     })
